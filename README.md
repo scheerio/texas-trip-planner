@@ -11,6 +11,9 @@ Requirements: Node 20 or newer, and Docker Desktop running.
 ```bash
 cp .env.example .env      # then paste your model API key into .env
 npm install
+npm run db:up
+npm run db:migrate   # creates the tables
+npm run db:seed      # loads campgrounds and parks from OpenStreetMap
 npm run dev
 ```
 
@@ -21,6 +24,8 @@ Open http://localhost:5173. The left panel shows a setup status check for the ba
 | `npm run dev` | Starts the database, the API (port 3001) and the web app (port 5173) |
 | `npm run typecheck` | Type-checks both packages |
 | `npm test` | Runs the backend unit tests |
+| `npm run db:migrate` | Applies database migrations |
+| `npm run db:seed` | Loads campgrounds and parks within about 320 km of Austin from OpenStreetMap |
 | `npm run db:reset` | Deletes the local database and starts a fresh one |
 
 ## Layout
