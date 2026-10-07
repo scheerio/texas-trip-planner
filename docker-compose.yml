@@ -1,0 +1,23 @@
+# Local development database: Postgres with the PostGIS extension for location queries.
+# Host port 5433 avoids clashing with a Postgres you may already run on 5432.
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    platform: linux/amd64
+    environment:
+      POSTGRES_USER: ttp
+      POSTGRES_PASSWORD: ttp
+      POSTGRES_DB: ttp
+    ports:
+      - "5433:5432"
+    volumes:
+      - ttp-db:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ttp -d ttp"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  ttp-db:
